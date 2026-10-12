@@ -42,7 +42,7 @@ Maven non serve: il progetto contiene il wrapper `./mvnw` (su Windows `mvnw.cmd`
 Comandi utili:
 
 ```bash
-cp .env.example .env   # una volta sola: le variabili per la dev mode
+cp .env.example .env   # una volta sola: le variabili per la dev mode e per il container
 ./mvnw quarkus:dev     # avvia l'app in modalità sviluppo, con ricarica automatica
 ./mvnw test            # esegue i test
 ./mvnw package         # crea target/*-runner.jar
@@ -120,7 +120,7 @@ CMD ["java", "-jar", "app.jar"]
 ```bash
 ./mvnw package
 docker build -t mia-app:1.0 .
-docker run -d --name app -p 8080:8080 -e APP_VERSION=1.0 -e MESSAGE="Ciao!" mia-app:1.0
+docker run -d --name app -p 8080:8080 --env-file .env mia-app:1.0
 curl localhost:8080/info
 curl -X POST localhost:8080/crash
 docker ps -a      # il container è Exited: nessuno lo riavvia
