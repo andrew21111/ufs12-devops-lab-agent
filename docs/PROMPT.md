@@ -55,11 +55,11 @@ Risposta: elenca i file creati o modificati e spiega in due frasi cosa fa ognuno
 2. **Leggi prima di accettare.** Il codice lo committi tu: se non capisci una riga, chiedi all'agent di spiegarla.
 3. **Correggi, non ricominciare.** Se qualcosa non va, scrivi cosa non va e incolla l'errore completo.
 
-## Checklist per la revisione del compagno
+## Checklist
 
 - [ ] Il prompt copre tutti e 7 i requisiti di `docs/REQUISITI.md`?
 - [ ] Ogni requisito dice indirizzo, metodo HTTP e formato della risposta?
-- [ ] Ci sono i vincoli (niente database, niente dipendenze, Dockerfile escluso, `/crash` disattivabile nei test)?
+- [ ] Ci sono i vincoli (niente database, niente dipendenze, Dockerfile escluso)?
 - [ ] Dice come verificare il risultato?
 - [ ] Dice cosa rispondere alla fine?
 - [ ] Un compagno che non conosce l'esercizio capirebbe cosa costruire?

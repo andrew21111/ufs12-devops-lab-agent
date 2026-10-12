@@ -12,9 +12,3 @@ Il prompt per l'agent deve coprirli tutti e 7. Un requisito è soddisfatto quand
 | 5 | Messaggio e versione arrivano dalle variabili `MESSAGE` e `APP_VERSION`, con un valore di default | `MESSAGE=Ciao ./mvnw quarkus:dev`, oppure `.env` | stessa immagine, configurazioni diverse |
 | 6 | Porta letta da `PORT` (default `8080`), in ascolto su `0.0.0.0` | l'app risponde dal container con `-p 8080:8080` | su `localhost` il container non è raggiungibile |
 | 7 | Un solo JAR (uber-jar, già configurato), nessun database, nessun file scritto su disco | `./mvnw package` crea `target/*-runner.jar` | il container si può buttare e ricreare |
-
-## Attenzione a `/crash` nei test
-
-Se un test chiama `/crash` e l'app esegue davvero `System.exit`, si spegne anche la JVM dei test e la build fallisce.
-Lo spegnimento deve essere disattivabile con una proprietà, ad esempio `app.crash.exit=false` nel profilo di test (`%test.`).
-È un vincolo da scrivere nel prompt.

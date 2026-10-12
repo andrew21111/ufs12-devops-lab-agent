@@ -28,7 +28,8 @@ Rispondi in italiano. Chi usa questo repository sta imparando: spiega ogni modif
 4. **Dipendenze:** usa solo le estensioni già presenti. Se ne serve un'altra, chiedi prima.
 5. **Codice piccolo e leggibile:** una classe di risorse REST è sufficiente.
 6. **Test:** per ogni endpoint scrivi un test in `src/test/java` con `@QuarkusTest` e RestAssured.
-   Un test non deve mai spegnere la JVM: lo spegnimento di `/crash` va disattivato nel profilo di test.
+   Un test non deve mai spegnere la JVM: `/crash` esegue `System.exit` solo se la proprietà `app.crash.exit` è `true`.
+   È già configurata in `application.properties` (`true` di default, `false` nel profilo di test): non cambiarla.
    Prima di dichiarare finito il lavoro, esegui `./mvnw test` e riporta l'esito.
 7. **Segreti:** non scrivere mai password, token o chiavi nel codice o nella configurazione.
 8. **Spiegazione:** alla fine elenca i file creati o modificati e spiega in due o tre frasi cosa fa ciascuno.
