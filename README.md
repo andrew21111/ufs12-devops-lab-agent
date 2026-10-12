@@ -50,13 +50,13 @@ cp .env.example .env   # una volta sola: le variabili per la dev mode e per il c
 
 ---
 
-## Lab 1 · Fork, clone, commit (30')
+## Lab 1 · Copia, clone, commit (30')
 
-1. Su GitHub, nella pagina di questo repository, premi **Fork → Create fork**: ottieni la tua copia sul tuo account.
+1. Su GitHub, nella pagina di questo repository, premi **Use this template → Create a new repository**, scegli un nome e conferma: ottieni la tua copia sul tuo account.
 2. Clona la tua copia:
 ```bash
-   git clone <URL del tuo fork>
-   cd ufs12-devops-lab-agent
+   git clone <URL della tua copia>
+   cd <nome del tuo repository>
 ```
 3. Aggiungi il tuo nome nella sezione *Chi ha lavorato su questo repository*.
 4. Salva il lavoro e pubblicalo:
@@ -65,7 +65,7 @@ cp .env.example .env   # una volta sola: le variabili per la dev mode e per il c
    git commit -m "docs: aggiungo il mio nome"
    git push
 ```
-5. Ricarica la pagina del tuo fork su GitHub: il tuo nome è nel README.
+5. Ricarica la pagina del tuo repository su GitHub: il tuo nome è nel README.
 
 ## Lab 2 · Il tuo primo container (30')
 
@@ -127,7 +127,7 @@ docker ps -a      # il container è Exited: nessuno lo riavvia
 docker rm app
 ```
 
-Infine salva il lavoro sul tuo fork, come nel Lab 1:
+Infine salva il lavoro sul tuo repository, come nel Lab 1:
 
 ```bash
 git add .
@@ -167,7 +167,7 @@ Immagine: localhost:5001/mia-app (tag 1.0 e 2.0)
 
 ## Checklist per domani
 
-- [ ] App e `Dockerfile` pubblicati sul tuo fork
+- [ ] App e `Dockerfile` pubblicati sul tuo repository GitHub
 - [ ] `/health` e `/info` rispondono
 - [ ] L'app ascolta su `0.0.0.0:8080`
 - [ ] `POST /crash` spegne il container
