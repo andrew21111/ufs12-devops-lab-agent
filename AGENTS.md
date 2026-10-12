@@ -5,7 +5,8 @@ Rispondi in italiano. Chi usa questo repository sta imparando: spiega ogni modif
 
 ## Il progetto
 
-- Applicazione web Java 21 con Quarkus 3 (estensioni Quarkus REST e REST Jackson).
+- Applicazione web Java con Quarkus 3 (estensioni Quarkus REST e REST Jackson). Gira con Java 17 e con Java 21.
+- Il codice deve compilare con Java 17 (`maven.compiler.release` è `17` nel `pom.xml`): non usare funzionalità introdotte dopo Java 17.
 - Build con il Maven wrapper: `./mvnw` (su Windows `mvnw.cmd`). Maven non è installato a parte.
 - Il pacchetto è un uber-jar: `./mvnw package` produce `target/*-runner.jar`. Non cambiare `quarkus.package.jar.type`.
 - Il package Java dell'applicazione è `it.zucchetti.lab`.

@@ -18,7 +18,7 @@ Nel pomeriggio l'app la scrive un coding agent nel tuo editor. Il tuo lavoro è 
 | Strumento | Verifica |
 | --- | --- |
 | Git | `git --version` |
-| JDK 21 (Eclipse Temurin) | `java -version` |
+| JDK 17 o 21 (Eclipse Temurin) | `java -version` |
 | Docker Desktop | `docker run hello-world` |
 | VS Code + Extension Pack for Java | apri questa cartella |
 | Account GitHub e Docker Hub | `docker login` |

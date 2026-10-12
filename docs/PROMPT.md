@@ -7,7 +7,7 @@ tranne quello che gli scrivi tu. Il risultato dipende quasi tutto da come chiedi
 
 | Parte | Domanda a cui risponde | Esempio |
 | --- | --- | --- |
-| **Contesto** | Su cosa sta lavorando? | Progetto Quarkus 3, Java 21, package `it.zucchetti.lab` |
+| **Contesto** | Su cosa sta lavorando? | Progetto Quarkus 3, Java 17, package `it.zucchetti.lab` |
 | **Obiettivo** | Cosa deve esistere alla fine? | Una web app con 4 endpoint pronta per girare in un container |
 | **Requisiti** | Cosa, esattamente? | Indirizzi, metodi HTTP, formato delle risposte, variabili: uno per riga |
 | **Vincoli** | Cosa non deve fare? | Niente database, niente nuove dipendenze, non toccare il Dockerfile |
@@ -30,7 +30,7 @@ L'agent deve indovinare, e ogni volta indovina in modo diverso.
 Questo esempio non è l'esercizio di oggi: serve a vedere la struttura.
 
 ```text
-Contesto: progetto Quarkus 3 con Java 21, package it.zucchetti.lab, estensioni REST e REST Jackson.
+Contesto: progetto Quarkus 3 con Java 17, package it.zucchetti.lab, estensioni REST e REST Jackson.
 
 Obiettivo: aggiungere un endpoint che restituisca l'ora del server.
 
