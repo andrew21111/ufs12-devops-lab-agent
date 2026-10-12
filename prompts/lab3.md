@@ -1,7 +1,7 @@
 # Prompt del Lab 3
 
 Scrivi qui il prompt per l'agent, seguendo la guida in `docs/PROMPT.md` e i requisiti in `docs/REQUISITI.md`.
-Un compagno lo rivede con la checklist prima che tu lo usi. Poi lo committi insieme al codice.
+Poi lo committi insieme al codice.
 
 Autori: <!-- i vostri nomi -->
 
