@@ -11,7 +11,7 @@ Nel pomeriggio l'app la scrive un coding agent nel tuo editor. Il tuo lavoro è 
 
 ## Chi ha lavorato su questo repository
 
-<!-- Lab 1: aggiungi qui il tuo nome con una Pull Request -->
+<!-- Lab 1: aggiungi qui il tuo nome -->
 
 ## Prerequisiti
 
@@ -50,25 +50,22 @@ cp .env.example .env   # una volta sola: le variabili per la dev mode
 
 ---
 
-## Lab 1 · Clone, branch, Pull Request (30')
+## Lab 1 · Fork, clone, commit (30')
 
-1. Su GitHub premi **Use this template → Create a new repository** e crea la tua copia.
-2. Clonala e crea un branch:
+1. Su GitHub, nella pagina di questo repository, premi **Fork → Create fork**: ottieni la tua copia sul tuo account.
+2. Clona la tua copia:
 ```bash
-   git clone <URL della tua copia>
-   cd <nome repo>
-   git switch -c feature/mio-nome
+   git clone <URL del tuo fork>
+   cd ufs12-devops-lab-agent
 ```
 3. Aggiungi il tuo nome nella sezione *Chi ha lavorato su questo repository*.
 4. Salva il lavoro e pubblicalo:
 ```bash
    git add README.md
    git commit -m "docs: aggiungo il mio nome"
-   git push -u origin feature/mio-nome
+   git push
 ```
-5. Su GitHub apri la Pull Request (**Compare & pull request**).
-6. Un compagno legge la modifica e la approva, poi fai **Merge**.
-7. Torna su `main` e aggiorna: `git switch main && git pull`
+5. Ricarica la pagina del tuo fork su GitHub: il tuo nome è nel README.
 
 ## Lab 2 · Il tuo primo container (30')
 
@@ -89,22 +86,24 @@ docker stop web && docker rm web
 
 ## Lab 3 · Il prompt e il container (60')
 
-1. **Crea un branch:** `git switch -c feature/app`
-2. **Leggi** `docs/REQUISITI.md` e `docs/PROMPT.md`.
-3. **Scrivi il prompt** in `prompts/lab3.md`, seguendo le sei parti: contesto, obiettivo, requisiti, vincoli, verifica, formato della risposta.
-4. **Revisione:** un compagno lo controlla con la checklist in fondo a `docs/PROMPT.md`.
-5. **Dai il prompt all'agent** e leggi quello che fa. Se il risultato non va, correggi il prompt e annota la modifica in fondo al file.
-6. **Verifica i requisiti uno per uno** con l'app in dev mode:
+1. **Leggi** `docs/REQUISITI.md` e `docs/PROMPT.md`.
+2. **Scrivi il prompt** in `prompts/lab3.md`, seguendo le sei parti: contesto, obiettivo, requisiti, vincoli, verifica, formato della risposta.
+3. **Revisione:** un compagno lo controlla con la checklist in fondo a `docs/PROMPT.md`.
+4. **Dai il prompt all'agent** e leggi quello che fa. Se il risultato non va, correggi il prompt e annota la modifica in fondo al file.
+5. **Verifica i requisiti uno per uno** con l'app in dev mode:
 ```bash
    ./mvnw quarkus:dev
    curl localhost:8080/info
    curl localhost:8080/health
 ```
-7. **Esegui i test:** `./mvnw test`.
+
+oppure da browser.
+
+6. **Esegui i test:** `./mvnw test`.
 
 ### Il Dockerfile
 
-Il Dockerfile lo scrivi tu, nella cartella principale del progetto:
+Il Dockerfile, nella cartella principale del progetto:
 
 ```dockerfile
 FROM eclipse-temurin:21-jre
@@ -128,7 +127,15 @@ docker ps -a      # il container è Exited: nessuno lo riavvia
 docker rm app
 ```
 
-Infine commit, push e Pull Request, come nel Lab 1. Ferma la dev mode prima di avviare il container: usano la stessa porta.
+Infine salva il lavoro sul tuo fork, come nel Lab 1:
+
+```bash
+git add .
+git commit -m "Lab 3: app e Dockerfile"
+git push
+```
+
+Ferma la dev mode prima di avviare il container: usano la stessa porta.
 
 ## Lab 4 · Il tuo registry locale (40')
 
@@ -160,7 +167,7 @@ Immagine: localhost:5001/mia-app (tag 1.0 e 2.0)
 
 ## Checklist per domani
 
-- [ ] App e `Dockerfile` nel repository, Pull Request fatta
+- [ ] App e `Dockerfile` pubblicati sul tuo fork
 - [ ] `/health` e `/info` rispondono
 - [ ] L'app ascolta su `0.0.0.0:8080`
 - [ ] `POST /crash` spegne il container
