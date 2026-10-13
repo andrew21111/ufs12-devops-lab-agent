@@ -7,11 +7,11 @@ Domani la stessa immagine girerà su Kubernetes.
 Repository → App Java → Dockerfile → Immagine → Registry → Kubernetes (domani)
 ```
 
-Nel pomeriggio l'app la scrive un coding agent nel tuo editor. Il tuo lavoro è il **prompt**: deve essere così chiaro che l'agent costruisca esattamente l'app richiesta.
+Nel pomeriggio completi un'app già avviata, con l'aiuto di un assistente di intelligenza artificiale nel browser. L'assistente non vede il codice: gli incolli tu quello che serve.
 
 ## Chi ha lavorato su questo repository
 
-<!-- Lab 1: aggiungi qui il tuo nome -->
+<!-- Lab 1: aggiungi qui il tuo nome con una Pull Request -->
 
 ## Prerequisiti
 
@@ -30,11 +30,12 @@ Maven non serve: il progetto contiene il wrapper `./mvnw` (su Windows `mvnw.cmd`
 | File | A cosa serve |
 | --- | --- |
 | `README.md` | queste istruzioni |
-| `AGENTS.md` | le regole che l'agent legge da solo prima di modificare il codice |
-| `docs/REQUISITI.md` | i 7 requisiti dell'app, con la verifica di ognuno |
-| `docs/PROMPT.md` | come si scrive un buon prompt, con esempi e checklist |
-| `prompts/lab3.md` | il modello da compilare con il tuo prompt |
-| `pom.xml`, `mvnw`, `.mvn/`, `src/` | lo scheletro del progetto Quarkus, ancora vuoto |
+| `docs/ESERCIZI.md` | gli esercizi del Lab 3, con la verifica di ognuno |
+| `docs/CONTESTO.md` | il testo da incollare nell'assistente web come primo messaggio |
+| `AGENTS.md` | le regole per gli assistenti di IA |
+| `src/main/java/.../AppResource.java` | l'app: `/info` e `/health` pronti, gli esercizi segnati con `TODO` |
+| `src/test/java/...` | i test: quelli degli esercizi sono spenti con `@Disabled` |
+| `pom.xml`, `mvnw`, `.mvn/` | progetto Quarkus e Maven wrapper |
 | `.env.example` | le variabili d'ambiente dell'app: copialo in `.env` |
 | `.dockerignore` | cosa escludere dalla build dell'immagine |
 | `docs/pipeline-demo.yaml` | la pipeline mostrata in aula (non viene eseguita) |
@@ -42,32 +43,35 @@ Maven non serve: il progetto contiene il wrapper `./mvnw` (su Windows `mvnw.cmd`
 Comandi utili:
 
 ```bash
-cp .env.example .env   # una volta sola: le variabili per la dev mode e per il container
+cp .env.example .env   # una volta sola: le variabili per la dev mode
 ./mvnw quarkus:dev     # avvia l'app in modalità sviluppo, con ricarica automatica
 ./mvnw test            # esegue i test
 ./mvnw package         # crea target/*-runner.jar
 ```
 
-Con l'app avviata, apri `http://localhost:8080/q/swagger-ui`: vedi tutti gli endpoint e li provi dal browser, anche `POST /crash`.
+Con l'app avviata, apri `http://localhost:8080/q/swagger-ui`: vedi tutti gli endpoint e li provi dal browser.
 
 ---
 
-## Lab 1 · Copia, clone, commit (30')
+## Lab 1 · Clone, branch, Pull Request (30')
 
-1. Su GitHub, nella pagina di questo repository, premi **Use this template → Create a new repository**, scegli un nome e conferma: ottieni la tua copia sul tuo account.
-2. Clona la tua copia:
+1. Su GitHub premi **Use this template → Create a new repository** e crea la tua copia.
+2. Clonala e crea un branch:
 ```bash
    git clone <URL della tua copia>
-   cd <nome del tuo repository>
+   cd <nome repo>
+   git switch -c feature/mio-nome
 ```
 3. Aggiungi il tuo nome nella sezione *Chi ha lavorato su questo repository*.
 4. Salva il lavoro e pubblicalo:
 ```bash
    git add README.md
    git commit -m "docs: aggiungo il mio nome"
-   git push
+   git push -u origin feature/mio-nome
 ```
-5. Ricarica la pagina del tuo repository su GitHub: il tuo nome è nel README.
+5. Su GitHub apri la Pull Request (**Compare & pull request**).
+6. Un compagno legge la modifica e la approva, poi fai **Merge**.
+7. Torna su `main` e aggiorna: `git switch main && git pull`
 
 ## Lab 2 · Il tuo primo container (30')
 
@@ -86,26 +90,24 @@ docker stop web && docker rm web
 
 **Bonus:** Java senza installarlo: `docker run --rm eclipse-temurin:21-jre java -version`
 
-## Lab 3 · Il prompt e il container (60')
+## Lab 3 · Gli esercizi e il container (60')
 
-1. **Leggi** `docs/REQUISITI.md` e `docs/PROMPT.md`.
-2. **Scrivi il prompt** in `prompts/lab3.md`, seguendo le sei parti: contesto, obiettivo, requisiti, vincoli, verifica, formato della risposta.
-3. **Revisione:** un compagno lo controlla con la checklist in fondo a `docs/PROMPT.md`.
-4. **Dai il prompt all'agent** e leggi quello che fa. Se il risultato non va, correggi il prompt e annota la modifica in fondo al file.
-5. **Verifica i requisiti uno per uno** con l'app in dev mode:
+1. **Crea un branch:** `git switch -c feature/esercizi`
+2. **Avvia l'app** e controlla che funzioni prima di toccare qualcosa:
 ```bash
+   cp .env.example .env
    ./mvnw quarkus:dev
    curl localhost:8080/info
    curl localhost:8080/health
 ```
-
-oppure da browser.
-
-6. **Esegui i test:** `./mvnw test`.
+3. **Apri l'assistente web** e incolla il testo di `docs/CONTESTO.md` come primo messaggio.
+4. **Fai gli esercizi** di `docs/ESERCIZI.md`: l'1 e il 2 sono obbligatori, il 3 e il 4 facoltativi.
+   Per ognuno incolla nella chat il testo dell'esercizio e il codice su cui lavori.
+5. **Verifica:** cancella la riga `@Disabled` sopra il test dell'esercizio e lancia `./mvnw test`.
 
 ### Il Dockerfile
 
-Il Dockerfile, nella cartella principale del progetto:
+Il Dockerfile lo scrivi tu, nella cartella principale del progetto:
 
 ```dockerfile
 FROM eclipse-temurin:21-jre
@@ -122,22 +124,14 @@ CMD ["java", "-jar", "app.jar"]
 ```bash
 ./mvnw package
 docker build -t mia-app:1.0 .
-docker run -d --name app -p 8080:8080 --env-file .env mia-app:1.0
+docker run -d --name app -p 8080:8080 -e APP_VERSION=1.0 -e MESSAGE="Ciao!" mia-app:1.0
 curl localhost:8080/info
 curl -X POST localhost:8080/crash
 docker ps -a      # il container è Exited: nessuno lo riavvia
 docker rm app
 ```
 
-Infine salva il lavoro sul tuo repository, come nel Lab 1:
-
-```bash
-git add .
-git commit -m "Lab 3: app e Dockerfile"
-git push
-```
-
-Ferma la dev mode prima di avviare il container: usano la stessa porta.
+Infine commit, push e Pull Request, come nel Lab 1. Ferma la dev mode prima di avviare il container: usano la stessa porta.
 
 ## Lab 4 · Il tuo registry locale (40')
 
@@ -169,7 +163,7 @@ Immagine: localhost:5001/mia-app (tag 1.0 e 2.0)
 
 ## Checklist per domani
 
-- [ ] App e `Dockerfile` pubblicati sul tuo repository GitHub
+- [ ] App e `Dockerfile` nel repository, Pull Request fatta
 - [ ] `/health` e `/info` rispondono
 - [ ] L'app ascolta su `0.0.0.0:8080`
 - [ ] `POST /crash` spegne il container
@@ -186,4 +180,6 @@ Immagine: localhost:5001/mia-app (tag 1.0 e 2.0)
 | `docker build` chiede un argomento | manca il punto finale: `docker build -t mia-app:1.0 .` |
 | `./mvnw: Permission denied` (macOS/Linux) | `chmod +x mvnw` |
 | `mvnw` non parte su Windows | usa `mvnw.cmd` |
+| errore di compilazione dopo aver incollato codice | parentesi graffe spaiate o `import` mancanti: incolla l'errore completo nell'assistente |
+| `cannot find symbol` su `Response` o `POST` | manca l'`import` da `jakarta.ws.rs` |
 | con Podman il push fallisce per HTTPS | `podman push --tls-verify=false localhost:5001/mia-app:1.0` |
