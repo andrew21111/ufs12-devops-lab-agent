@@ -48,6 +48,8 @@ cp .env.example .env   # una volta sola: le variabili per la dev mode e per il c
 ./mvnw package         # crea target/*-runner.jar
 ```
 
+Con l'app avviata, apri `http://localhost:8080/q/swagger-ui`: vedi tutti gli endpoint e li provi dal browser, anche `POST /crash`.
+
 ---
 
 ## Lab 1 · Copia, clone, commit (30')
